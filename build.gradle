@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.springframework.cloud:spring-cloud-contract-gradle-plugin:2.2.3.RELEASE'
+        classpath 'org.springframework.cloud:spring-cloud-contract-gradle-plugin:2.2.8.RELEASE'
     }
 }
 
@@ -22,7 +22,6 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 apply plugin: 'spring-cloud-contract'
-apply plugin: 'maven-publish'
 
 repositories {
     mavenCentral()
@@ -35,12 +34,8 @@ configurations {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 ext {
-    set('springCloudVersion', "2021.0.1")
+    set('springCloudVersion', "2020.0.5")
 }
 
 dependencies {
@@ -85,8 +80,8 @@ contracts {
 
 task stubsJar(type: Jar) {
     classifier = "stubs"
-    into("META-INF/${project.group}/${project.name}/${project.version}/mappings") {
-        include('**/*.*')
-        from("${project.buildDir}/generated-snippets/stubs")
+    into("/") {
+        include('**/*.groovy')
+        from("${project.rootDir}/src/main/resources/contracts")
     }
 }
