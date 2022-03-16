@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
 
-@FeignClient(name = "accounts", fallback = AccountsConnectorFallback.class)
+@FeignClient(name = "minibank", fallback = AccountsConnectorFallback.class)
 public interface AccountsConnector {
     @GetMapping("/v1/accounts")
     CustomerDto getAccounts(@RequestParam("customerId") Long customerId);
